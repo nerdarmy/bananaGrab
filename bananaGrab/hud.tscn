@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccahjc56iejc8"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_k3h8h"]
+[ext_resource type="FontFile" uid="uid://bdkumne4lqdrj" path="res://assets/AntonSC-Regular.ttf" id="2_nh5ls"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qm6ul"]
+font = ExtResource("2_nh5ls")
+font_size = 72
+outline_size = 4
+outline_color = Color(0, 0, 1, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_veikp"]
+font = ExtResource("2_nh5ls")
+font_size = 72
+outline_size = 4
+outline_color = Color(0, 0, 1, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t3gj4"]
+font = ExtResource("2_nh5ls")
+font_size = 72
+outline_size = 4
+outline_color = Color(0, 0, 1, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_k3h8h")
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -49.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Banana Grab!"
+label_settings = SubResource("LabelSettings_qm6ul")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 109.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Score" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "000"
+label_settings = SubResource("LabelSettings_veikp")
+
+[node name="Time" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "000"
+label_settings = SubResource("LabelSettings_t3gj4")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_nh5ls")
+theme_override_font_sizes/font_size = 64
+text = "Start Game"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

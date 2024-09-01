@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://d53g4hgdx3p3"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_0e8cw"]
+[ext_resource type="Texture2D" uid="uid://drdpy0facgk08" path="res://assets/Green.png" id="2_bfo6l"]
+[ext_resource type="PackedScene" uid="uid://b700ycvd6ns5r" path="res://player.tscn" id="3_ck7t2"]
+[ext_resource type="PackedScene" uid="uid://hqjfiiep3khn" path="res://power_up.tscn" id="3_hwc1m"]
+[ext_resource type="PackedScene" uid="uid://bb5f23g6tnmns" path="res://banana.tscn" id="4_ey1nr"]
+[ext_resource type="PackedScene" uid="uid://dmtxxuvbnhk8c" path="res://spike_ball.tscn" id="5_0o683"]
+[ext_resource type="PackedScene" uid="uid://ccahjc56iejc8" path="res://hud.tscn" id="7_aiql1"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0e8cw")
+banana_scene = ExtResource("4_ey1nr")
+powerup_scene = ExtResource("3_hwc1m")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bfo6l")
+stretch_mode = 1
+
+[node name="SpikeBall01" parent="." instance=ExtResource("5_0o683")]
+position = Vector2(338, 259)
+
+[node name="SpikeBall02" parent="." instance=ExtResource("5_0o683")]
+position = Vector2(127, 462)
+
+[node name="Player" parent="." instance=ExtResource("3_ck7t2")]
+position = Vector2(174, 275)
+
+[node name="HUD" parent="." instance=ExtResource("7_aiql1")]
+
+[connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

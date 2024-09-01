@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://d53g4hgdx3p3"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_0e8cw"]
+[ext_resource type="Texture2D" uid="uid://bsd14cqm4hqt5" path="res://assets/ground.png" id="2_5m1bh"]
+[ext_resource type="PackedScene" uid="uid://b700ycvd6ns5r" path="res://player.tscn" id="3_ck7t2"]
+[ext_resource type="PackedScene" uid="uid://dmtxxuvbnhk8c" path="res://spike_ball.tscn" id="5_0o683"]
+[ext_resource type="AudioStream" uid="uid://vr4rf4dnrhi" path="res://assets/audio/banana.wav" id="6_b00le"]
+[ext_resource type="PackedScene" uid="uid://ccahjc56iejc8" path="res://hud.tscn" id="7_aiql1"]
+[ext_resource type="AudioStream" uid="uid://c4r4xdqa7xd4v" path="res://assets/audio/powerup.wav" id="7_ncmhm"]
+[ext_resource type="AudioStream" uid="uid://c0pktjhmmg82n" path="res://assets/audio/level.wav" id="8_5akdg"]
+[ext_resource type="AudioStream" uid="uid://dwjmdl31t563t" path="res://assets/audio/gameover.wav" id="9_1v8m6"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0e8cw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5m1bh")
+stretch_mode = 1
+
+[node name="SpikeBall01" parent="." instance=ExtResource("5_0o683")]
+position = Vector2(338, 259)
+
+[node name="SpikeBall02" parent="." instance=ExtResource("5_0o683")]
+position = Vector2(127, 462)
+
+[node name="Player" parent="." instance=ExtResource("3_ck7t2")]
+position = Vector2(174, 275)
+
+[node name="HUD" parent="." instance=ExtResource("7_aiql1")]
+
+[node name="PowerupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="BananaSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_b00le")
+
+[node name="PowerupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ncmhm")
+
+[node name="LevelSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_5akdg")
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_1v8m6")
+
+[connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

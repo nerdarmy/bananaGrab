@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmtxxuvbnhk8c"]
+
+[ext_resource type="Script" path="res://spike_ball.gd" id="1_pndxo"]
+[ext_resource type="Texture2D" uid="uid://d4aivp3gxf17b" path="res://assets/spikedBall.png" id="2_mfgjk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksw1s"]
+radius = 21.0
+
+[node name="SpikeBall" type="Area2D" groups=["spikes"]]
+position = Vector2(56, 45)
+script = ExtResource("1_pndxo")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_mfgjk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ksw1s")

@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://bb5f23g6tnmns"]
+
+[ext_resource type="Script" path="res://banana.gd" id="1_2rnjd"]
+[ext_resource type="Texture2D" uid="uid://nlihaqbwgqlt" path="res://assets/banana.png" id="2_uufpc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdjcc"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vtoq"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hirx6"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf1eh"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qebm"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s8a7"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4b0t"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilwny"]
+atlas = ExtResource("2_uufpc")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_11ybr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdjcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vtoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hirx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf1eh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qebm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s8a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4b0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilwny")
+}],
+"loop": false,
+"name": &"boink",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvj0w"]
+radius = 13.0
+
+[node name="Banana" type="Area2D" groups=["bananas"]]
+position = Vector2(204, 132)
+script = ExtResource("1_2rnjd")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_11ybr")
+animation = &"boink"
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bvj0w")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
